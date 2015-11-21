@@ -2,9 +2,10 @@
 
 require_once 'connection.php';
 require_once 'validator.php';
+require_once 'orm.php';
 
 
-class User
+class User extends DB
 {
     private $first_name;
     private $last_name;
@@ -15,40 +16,43 @@ class User
     private $db;
 
 
-    public function __construct()
-    {
-        $this->validate = new Validator();
-//        $this->db = new DatabaseConnection();
-    }
+    function __construct() {
+        $tableName = 'users';
+        parent::__construct($tableName);
+       // $this->table = 'users';
+   }
 
     public function makeHash($data)
     {
-
+        $password = password_hash($data, PASSWORD_DEFAULT);
     }
 
     public function verifyHash($secret,$hashedPassword)
     {
-
+        if (password_verify($secret, $hashedPassword)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function register($data){
+
         $this->first_name = $data['first_name'];
         $this->last_name = $data['last_name'];
-        $this->password = $data['password'];
+        $this->password = $data['password'] =$this->makeHash($data['password']);
         $this->email = $data['email'];
+        $this->phone = $data['phone'];
+        $this->type = $data['type'];
+        $this->status = $data['status'] = 1;
+        $this->created_at = $data['created_at'] = date('Y-m-d H:i:s');
+        $this->updated_at = $data['updated_at'] = date('Y-m-d H:i:s');
+
+        return $this->create($data);
 
 
-        if($this->validate->password($this->password))
-        {
-            $this->password = $this->makeHash($this->password);
-        }
 
-
-        if($this->validate->name($this->first_name) && $this->validate->name($this->last_name) && $this->validate->email($this->email)){
-            // new user query
-            $this->setSession();
-        }
-    }
+}
 
     public function login($data){
         $this->email = $data['email'];
