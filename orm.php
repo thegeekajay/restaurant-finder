@@ -43,6 +43,18 @@ class DB{
         return $findString;
     }
 
+    public function selectAll()
+    {
+        $findString = "SELECT * FROM `$this->table`;";
+        $result = $this->dbConnection->send_sql($findString);
+        $data = [];
+        while($row = mysqli_fetch_object($result))
+          {
+            array_push($data,(array) $row);
+          }
+        return $data;
+    }
+
 
     // public static function all(){
     //     static::$val.="2";
