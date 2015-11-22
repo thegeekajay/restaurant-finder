@@ -40,7 +40,7 @@ class DB{
     public function find($column,$value)
     {
         $findString = "SELECT * FROM `$this->table` WHERE `$column` = '$value'";
-        return $findString;
+        return $this->dbConnection->send_sql($findString)->fetch_assoc();
     }
 
     public function selectAll()
@@ -53,6 +53,33 @@ class DB{
             array_push($data,(array) $row);
           }
         return $data;
+    }
+
+    public function delete($column,$value)
+    {
+        $findString = "DELETE FROM `$this->table` WHERE `$column` = '$value';";
+        return $this->dbConnection->send_sql($findString);
+    }
+
+    public function update($column,$values,$data)
+    {
+        $updateString = "UPDATE `".$this->table."` SET ";
+        $size = count($data);
+        $values="";
+        $count=1;
+        foreach ($data as $key => $value) {
+            if($count == $size)
+            {
+                $updateString.=" `$key` = '$value'";
+            }else{
+                $updateString.=" `$key` = '$value',";
+
+            }
+            $count+=1;
+        }
+        $updateString.=" WHERE `$column` = '$values';";
+        // return $this->dbConnection->send_sql($updateString);
+        return $updateString;
     }
 
 
