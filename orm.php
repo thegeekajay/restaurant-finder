@@ -9,11 +9,11 @@ class DB{
     public function __construct($table)
     {
         $this->table = $table;
+        $this->dbConnection = new DatabaseConnection();
     }
 
     public function create($data)
     {
-        $this->dbConnection = new DatabaseConnection();
 
         $insertString = "INSERT INTO `".$this->table."`";
         $size = count($data);
@@ -35,6 +35,12 @@ class DB{
         $insertString = $insertString." (".$column.") VALUES (".$values.");";
         return $this->dbConnection->send_sql($insertString);
 
+    }
+
+    public function find($column,$value)
+    {
+        $findString = "SELECT * FROM `$this->table` WHERE `$column` = '$value'";
+        return $findString;
     }
 
 
