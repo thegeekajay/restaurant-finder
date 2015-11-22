@@ -8,8 +8,8 @@ class DB{
 
     public function __construct($table)
     {
-        $this->table = $table;
         $this->dbConnection = new DatabaseConnection();
+        $this->table = $table;
     }
 
     public function create($data)
@@ -37,9 +37,10 @@ class DB{
 
     }
 
+
     public function find($column,$value)
     {
-        $findString = "SELECT * FROM `$this->table` WHERE `$column` = '$value'";
+        $findString = "SELECT * FROM `$this->table` WHERE `$column` = '$value';";
         return $this->dbConnection->send_sql($findString)->fetch_assoc();
     }
 
@@ -65,7 +66,6 @@ class DB{
     {
         $updateString = "UPDATE `".$this->table."` SET ";
         $size = count($data);
-        $values="";
         $count=1;
         foreach ($data as $key => $value) {
             if($count == $size)
@@ -78,34 +78,8 @@ class DB{
             $count+=1;
         }
         $updateString.=" WHERE `$column` = '$values';";
-        // return $this->dbConnection->send_sql($updateString);
-        return $updateString;
+        return $this->dbConnection->send_sql($updateString);
     }
-
-
-    // public static function all(){
-    //     static::$val.="2";
-    //     return static::$val;
-    // }
-
-    // public static function where(){
-    //     static::$val.="3";
-    //     return new static;
-    // }
-
-    // public static function get(){
-    //     return static::$table;
-    // }
-
-
-
-
-    // // Create new model function
-//     public function create($data){
-//         $string = INSERT INTO
-//         INSERT INTO table_name (column1, column2, column3,...)
-// VALUES (value1, value2, value3,...)
-//     }
 
 }
 
