@@ -55,12 +55,12 @@
 							
 							<form>
 								<div class="top-margin">
-									<label>Username/Email <span class="text-danger">*</span></label>
-									<input type="text" class="form-control">
+									<label>Email <span class="text-danger email_error">*</span></label>
+									<input type="email" class="form-control" required>
 								</div>
 								<div class="top-margin">
-									<label>Password <span class="text-danger">*</span></label>
-									<input type="password" class="form-control">
+									<label>Password <span class="text-danger password_error">*</span></label>
+									<input type="password" class="form-control" required>
 								</div>
 
 								<hr>
