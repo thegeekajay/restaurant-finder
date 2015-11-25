@@ -15,8 +15,8 @@ require_once "include.php";
   
 
 
-  function __construct($data){
-   $tableName = 'order_menu';
+  function __construct(){
+   $tableName = 'menu';
     parent::__construct($tableName);
   }
 

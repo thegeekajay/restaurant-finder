@@ -2,7 +2,7 @@
 
 require_once "include.php";
 
-class review extends DB{
+class Review extends DB{
 
 
 //user_id;
