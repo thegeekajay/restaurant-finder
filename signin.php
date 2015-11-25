@@ -33,10 +33,10 @@
 	<!-- container -->
 	<div class="container">
 
-		<ol class="breadcrumb">
+		<!-- <ol class="breadcrumb">
 			<li><a href="index.php">Home</a></li>
 			<li class="active">User access</li>
-		</ol>
+		</ol> -->
 
 		<div class="row">
 			
