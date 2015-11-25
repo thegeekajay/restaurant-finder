@@ -1,6 +1,7 @@
 <?php
 
 require_once '../database/connection.php';
+require_once 'validator.php';
 require_once '../database/orm.php';
 require_once 'session.php';
 
