@@ -1,8 +1,6 @@
 <?php
 
-require_once 'connection.php';
-require_once 'validator.php';
-require_once 'orm.php';
+require_once "include.php";
 
 
 class User extends DB
@@ -19,7 +17,6 @@ class User extends DB
     function __construct() {
         $tableName = 'users';
         parent::__construct($tableName);
-       // $this->table = 'users';
    }
 
     public function makeHash($data)
