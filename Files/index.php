@@ -47,7 +47,7 @@
 	<header id="head">
 		<div class="container">
 			<div class="row">
-				<h1 class="lead">AWESOME, DELICIOUS, SATIDFACTION</h1>
+				<h1 class="lead">AWESOME, DELICIOUS, SATISFACTION</h1>
 				<p class="tagline">Explore all Restaurants</p>
 				<div class="col-xs-4">
     			<input type="text" class="form-control" placeholder="Search Text">
