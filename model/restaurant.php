@@ -59,7 +59,7 @@ return $this->selectAll();
 
 }
 
-public function viewRestaurnat($id) {
+public function viewRestaurant($id) {
 
 $data['restaurant']=$this->find('id', $id);
 $menu = new Menu();
