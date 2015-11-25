@@ -1,5 +1,5 @@
 <?php
-require_once '../database/creditCard.php';
+require_once '../../model/creditCard.php';
 
 $creditcard = new creditCard();
 

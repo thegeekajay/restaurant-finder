@@ -1,5 +1,5 @@
 <?php
-require_once '../database/review.php';
+require_once '../../model/review.php';
 
 $review = new Review();
 
