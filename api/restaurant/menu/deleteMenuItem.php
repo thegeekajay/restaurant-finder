@@ -1,5 +1,5 @@
 <?php
-require_once 'menu.php';
+require_once '../../model/menu.php';
 
 $menu = new Menu();
 

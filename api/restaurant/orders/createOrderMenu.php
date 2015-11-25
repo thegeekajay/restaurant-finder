@@ -1,5 +1,5 @@
 <?php
-require_once '../database/order.php';
+require_once '../../model/order.php';
 
 $order = new order();
 
