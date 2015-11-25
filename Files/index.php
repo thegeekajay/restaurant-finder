@@ -126,6 +126,7 @@
                             <p>Nikitha Jain</p>
                             <p>Sagar Shah</p>
                             <p>Ajay Ganesh</p>
+                                                        <p>Manikanth Talashu</p>
 						</div>
 					</div>
 
