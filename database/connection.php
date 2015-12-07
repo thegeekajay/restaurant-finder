@@ -70,7 +70,7 @@
             if (isset($this->mysqli))
                 $this->disconnect();
             try {
-                if (!$this->mysqli = new mysqli($this->host, $this->username, $this->password, $this->database, ""))
+                if (!$this->mysqli = new mysqli($this->host, $this->username, $this->password, $this->database))
                     throw new Exception("Cannot Connect to " . $this->host);
             } catch (Exception $e) {
                 echo $e->getMessage();
@@ -88,6 +88,12 @@
             if (!isset($this->mysqli)) $this->connect();
 
             return $this->mysqli->query($statement);
+        }
+
+        public function insert($statement) {
+            if (!isset($this->mysqli)) $this->connect();
+            $this->mysqli->query($statement);
+            return $this->mysqli->insert_id;
         }
     }
 ?>

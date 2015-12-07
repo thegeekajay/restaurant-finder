@@ -14,7 +14,6 @@ class DB{
 
     public function create($data)
     {
-
         $insertString = "INSERT INTO `".$this->table."`";
         $size = count($data);
         $column="";
@@ -33,7 +32,7 @@ class DB{
         }
 
         $insertString = $insertString." (".$column.") VALUES (".$values.");";
-        return $this->dbConnection->send_sql($insertString);
+        return $this->dbConnection->insert($insertString);
 
     }
 
@@ -42,6 +41,37 @@ class DB{
     {
         $findString = "SELECT * FROM `$this->table` WHERE `$column` = '$value';";
         return $this->dbConnection->send_sql($findString)->fetch_assoc();
+    }
+
+    public function multipleFind($column,$value)
+    {
+        $findString = "SELECT * FROM `$this->table` WHERE `$column` = '$value' AND `deleted_at` IS NULL;";
+        $result = $this->dbConnection->send_sql($findString);
+        $data = [];
+        while($row = mysqli_fetch_object($result))
+          {
+            array_push($data,(array) $row);
+          }
+        return $data;
+    }
+
+    public function multipleFindWithDeleted($column,$value)
+    {
+        $findString = "SELECT * FROM `$this->table` WHERE `$column` = '$value';";
+        $result = $this->dbConnection->send_sql($findString);
+        $data = [];
+        while($row = mysqli_fetch_object($result))
+          {
+            array_push($data,(array) $row);
+          }
+        return $data;
+    }
+
+
+    public function isExists($column,$value)
+    {
+        return !is_null($this->find($column,$value));
+
     }
 
     public function selectAll()
@@ -81,10 +111,9 @@ class DB{
         return $this->dbConnection->send_sql($updateString);
     }
 
+    public function execSQL($data)
+    {
+        return $this->dbConnection->send_sql($data);   
+    }
 }
-
 ?>
-
-
-
-

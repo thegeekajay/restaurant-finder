@@ -1,5 +1,5 @@
 <?php
-require_once '../../model/review.php';
+require_once($_SERVER['DOCUMENT_ROOT'].'/model/review.php');
 
 $review = new Review();
 

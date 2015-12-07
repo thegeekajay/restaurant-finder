@@ -1,7 +1,7 @@
 <?php
-require_once '../model/session.php';
+require_once($_SERVER['DOCUMENT_ROOT']."/model/session.php");
 
 $session = new Session();
 $session->destroy();
 
-header( 'Location: ../index.php' ) ;
+header( 'Location: ../../index.php' ) ;

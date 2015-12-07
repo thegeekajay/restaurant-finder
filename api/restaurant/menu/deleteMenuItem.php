@@ -1,8 +1,8 @@
 <?php
-require_once '../../model/menu.php';
+require_once($_SERVER['DOCUMENT_ROOT'].'/model/menu.php');
 
-$menu = new Menu();
+$menu = new Menu($_POST['restaurant_id']);
 
-print_r($menu->deleteMenuItem($column,$value));
+print_r($menu->deleteMenuItem($_POST['id']));
 
 ?>

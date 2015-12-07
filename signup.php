@@ -33,10 +33,10 @@
 	<!-- container -->
 	<div class="container">
 
-		<ol class="breadcrumb">
+		<!-- <ol class="breadcrumb">
 			<li><a href="index.php">Home</a></li>
 			<li class="active">Registration</li>
-		</ol>
+		</ol> -->
 
 		<div class="row">
 			
@@ -50,40 +50,34 @@
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<h3 class="thin text-center">Register a new account</h3>
-							<p class="text-center text-muted">Already have an account?<a href="signin.php">Login</a>  </p>
+							<p class="text-center text-muted">Already have an account?<a href="signin.php"> Login</a>  </p>
 							<hr>
 
-							<form>
+							<form id="register">
 								<div class="top-margin">
 									<label>First Name<span class="text-danger">*</span></label>
-									<input type="text" class="form-control">
+									<input name="first_name" type="text" class="form-control" required>
 								</div>
 								<div class="top-margin">
 									<label>Last Name<span class="text-danger">*</span></label>
-									<input type="text" class="form-control">
-								</div>
-                                <div class="top-margin">
-									<label>User Name<span class="text-danger">*</span></label>
-									<input type="text" class="form-control">
+									<input name="last_name" type="text" class="form-control" required>
 								</div>
 								<div class="top-margin">
 									<label>Email Address <span class="text-danger">*</span></label>
-									<input type="text" class="form-control">
+									<input name="email" type="email" class="form-control" required>
 								</div>
                                 <div class="top-margin">
 									<label>Phone Number <span class="text-danger">*</span></label>
-									<input type="text" class="form-control">
+									<input name="phone" type="text" class="form-control" required>
 								</div>
 
-								<div class="row top-margin">
-									<div class="col-sm-6">
-										<label>Password <span class="text-danger">*</span></label>
-										<input type="text" class="form-control">
-									</div>
-									<div class="col-sm-6">
+								<div class="top-margin">
+										<label>Password <span class="text-danger password_error">*</span></label>
+										<input name="password" id="password1" type="password" class="form-control" required>
+								</div>
+								<div class="top-margin">
 										<label>Confirm Password <span class="text-danger">*</span></label>
-										<input type="text" class="form-control">
-									</div>
+										<input type="password" id="password2" class="form-control" required>
 								</div>
 
 								<hr>
@@ -118,5 +112,6 @@
 	<script src="assets/js/headroom.min.js"></script>
 	<script src="assets/js/jQuery.headroom.min.js"></script>
 	<script src="assets/js/template.js"></script>
+	<script src="assets/js/script.js"></script>
 </body>
 </html>

@@ -1,7 +1,8 @@
 <?php
-require_once '../model/restaurant.php';
+require_once($_SERVER['DOCUMENT_ROOT']."/model/restaurant.php");
 
-$restatuant = new Restaurant();
-print_r($restaurant->deleteRestaurant());
+$restaurant = new Restaurant();
+print_r($restaurant->deleteRestaurant($_POST['id']));
 
 ?>
+
