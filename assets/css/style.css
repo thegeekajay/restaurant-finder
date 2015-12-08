@@ -209,6 +209,16 @@ h6, .h6 {
     z-index: 2;
 }
 
+.selected-div{
+  padding:20px;border: 1px solid rgba(0, 105, 197, 0.26);
+  background-color: rgba(0, 105, 197, 0.26);
+}
+.not-selected-div{
+  padding:20px;
+  border:1px solid #bbb;
+}
+
+
 
 @media screen and (min-width: 768px)
 .jumbotron {

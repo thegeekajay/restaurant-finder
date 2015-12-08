@@ -172,15 +172,16 @@ CREATE TABLE IF NOT EXISTS `restaurant_finder`.`order` (
   `user_id` INT NULL COMMENT '',
   `restaurant_id` INT NULL COMMENT '',
   `total` DOUBLE NULL COMMENT '',
+  `address_id` INT NULL COMMENT '',
   `card_id` INT NULL COMMENT '',
   `created_at` TIMESTAMP NULL COMMENT '',
   `status` INT NULL COMMENT '',
-  `created_at_copy1` TIMESTAMP NULL COMMENT '',
   `updated_at` TIMESTAMP NULL COMMENT '',
   `deleted_at` TIMESTAMP NULL COMMENT '',
   PRIMARY KEY (`id`)  COMMENT '',
   INDEX `user_id_idx` (`user_id` ASC)  COMMENT '',
   INDEX `restaurant_id_idx` (`restaurant_id` ASC)  COMMENT '',
+  INDEX `address_id_idx` (`address_id` ASC)  COMMENT '',
   INDEX `card_id_idx` (`card_id` ASC)  COMMENT '',
   CONSTRAINT `order_user_id`
     FOREIGN KEY (`user_id`)
@@ -192,6 +193,11 @@ CREATE TABLE IF NOT EXISTS `restaurant_finder`.`order` (
     REFERENCES `restaurant_finder`.`restaurant` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
+  CONSTRAINT `order_address_id`
+    FOREIGN KEY (`address_id`)
+    REFERENCES `restaurant_finder`.`delivery_address` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
   CONSTRAINT `order_card_id`
     FOREIGN KEY (`card_id`)
     REFERENCES `restaurant_finder`.`credit_cards` (`id`)

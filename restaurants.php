@@ -31,8 +31,8 @@ if (isset($_GET['id'])) {
 	<?php include("./include/navbar.php"); ?>
 
 	<div class="container" style="margin-top:100px;margin-bottom:50px">
-	<? if($session->session_exist('user_type')): ?>
-	<? if($data != NULL): ?>	
+		<? if($session->session_exist('user_type')): ?>
+		<? if($data != NULL): ?>	
 		<div class="row">
 			<div class="col-sm-8">
 				<h1><?=$data['name'];?></h1>
@@ -66,70 +66,38 @@ if (isset($_GET['id'])) {
 			<div class="col-sm-8">
 				<div class="tab-content" style="padding-top: 20px;">
 					<div role="tabpanel" class="tab-pane active" id="menu">
-						<div class="row">
-							<div class="col-sm-2">
-								<img src="http://s3-media2.fl.yelpcdn.com/bphoto/_QHr5lj_VbwBY54g7Kuhmg/180s.jpg" class="img-responsive" style="border-radius:10px">
-							</div>
-							<div class="col-sm-8">
-								<h4>Ceviche de Camarones - $9</h4>
-								<h5>Lime, cilantro, onion and marinated shrimp served with plantain chips</h5>
-							</div>
-							<div class="col-sm-2">
-								<a class="fa-stack fa-lg" item-id="1" item-name="Ceviche de Camarones" item-price="9">
-									<i class="fa fa-circle fa-stack-2x"></i>
-									<i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+						<?php
+						if(count($menu_data)>0)
+						{
+							echo '<div class="menu_item" >';
+							foreach ($menu_data as $key => $value) {
+
+								echo '<div class="row">
+								<div class="col-sm-2">
+								<img src="'.$value['image'].'" class="img-responsive" style="border-radius:10px">
+								</div>
+								<div class="col-sm-8">
+								<h4>'.$value['item'].' - $'.$value['price'].'</h4>
+								<h5>'.$value['detail'].'</h5>
+								</div>
+								<div class="col-sm-2">
+								<a class="fa-stack fa-lg add-menu-item" item-id="'.$value['id'].'" item-name="'.$value['item'].'" item-price="'.$value['price'].'">
+								<i class="fa fa-circle fa-stack-2x"></i>
+								<i class="fa fa-plus fa-stack-1x fa-inverse"></i>
 								</a>
-							</div>
-						</div>
-						<hr>
-						<div class="row">
-							<div class="col-sm-2">
-								<img src="http://s3-media1.fl.yelpcdn.com/bphoto/6JYxy_HZRDgmv02YxX6g8Q/180s.jpg" class="img-responsive" style="border-radius:10px">
-							</div>
-							<div class="col-sm-8">
-								<h4>Papa Rellena - $3.5</h4>
-								<h5>Mashed potato stuffed with ground meat and cooked crispy outside and soft inside</h5>
-							</div>
-							<div class="col-sm-2">
-								<a class="fa-stack fa-lg" item-id="2" item-name="Papa Rellena" item-price="3.5">
-									<i class="fa fa-circle fa-stack-2x"></i>
-									<i class="fa fa-plus fa-stack-1x fa-inverse"></i>
-								</a>
-							</div>
-						</div>
-						<hr>
-						<div class="row">
-							<div class="col-sm-2">
-								<img src="http://s3-media3.fl.yelpcdn.com/bphoto/_AY6gVxFraQ5Kox7nlaHZQ/180s.jpg" class="img-responsive" style="border-radius:10px">
-							</div>
-							<div class="col-sm-8">
-								<h4>Empanada de Pollo o Carne - $3.5</h4>
-								<h5>A crescent-shaped pastry turnover filled with chicken or beef</h5>
-							</div>
-							<div class="col-sm-2">
-								<a class="fa-stack fa-lg" item-id="3" item-name="Empanada de Pollo o Carne" item-price="3.5">
-									<i class="fa fa-circle fa-stack-2x"></i>
-									<i class="fa fa-plus fa-stack-1x fa-inverse"></i>
-								</a>
-							</div>
-						</div>
-						<hr>
-						<div class="row">
-							<div class="col-sm-2">
-								<img src="http://s3-media1.fl.yelpcdn.com/bphoto/4zATrXcci0CUNUnQV5YhIA/180s.jpg" class="img-responsive" style="border-radius:10px">
-							</div>
-							<div class="col-sm-8">
-								<h4>Tasajo Con Boniato - $17</h4>
-								<h5>Braised dry-cured shredded beef served with cuban sweet potato and rice</h5>
-							</div>
-							<div class="col-sm-2">
-								<a class="fa-stack fa-lg" item-id="4" item-name="Tasajo Con Boniato" item-price="17">
-									<i class="fa fa-circle fa-stack-2x"></i>
-									<i class="fa fa-plus fa-stack-1x fa-inverse"></i>
-								</a>
-							</div>
-						</div>
-						<hr>
+								</div>
+								</div>
+								<hr>';
+							}
+							echo '</div>';
+						}
+						else
+						{
+							echo '<h2 class="no_menu_item">No Menu item listed!</h2>';
+						}
+						?>
+						
+						
 					</div>
 					<div role="tabpanel" class="tab-pane" id="review">
 						<?php
@@ -161,112 +129,95 @@ if (isset($_GET['id'])) {
 			</div>
 			<div class="col-sm-4" style="">
 				<h3>Your order</h3>
-				<div class="order">
-					<div item-id="4" item-quantity="1" item-name="Tasajo Con Boniato" item-price="17">
-						<div class="row">
-							<div class="col-sm-2">
-								<button class="btn btn-default quantity">2</button>
-							</div>
-							<div class="col-sm-10"><b>Tasajo Con Boniato</b></div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-4">
-								<div class="btn-group" role="group" aria-label="...">
-									<button type="button" class="btn btn-default item-minus" item-id="4"><i class="fa fa-minus"></i></button>
-									<button type="button" class="btn btn-default item-add" item-id="4"><i class="fa fa-plus"></i></button>
-								</div>
-							</div>
-							<div class="col-sm-8">
-								<h3 class="price">$34</h3>
-							</div>
+				<div class="order" restaurant-id="<?= $_GET['id']; ?>">
 
-						</div>
-					</div>
-					<hr>
-					<h3>Total: $34</h3>
-					<hr>
-					<a href="checkout.php" class="btn btn-primary">Proceed to checkout</a>
 				</div>
+				<div>
+					<h3>Total: $<span id="order_total">0<span></h3>
+					<hr>
+					<a href="#" class="btn btn-primary checkout">Proceed to checkout</a>
+					<hr>
+				</div>
+
 			</div>
 
 
 		</div>
 		
-	
-<? else: ?>
-<h1>Restaurant Not Found!</h1>
+
+	<? else: ?>
+	<h1>Restaurant Not Found!</h1>
 <? endif; ?>
 
 <? else: ?>
 <h1>Non-Authenticated</h1>
 
 <? endif; ?>
-	</div>
+</div>
 
 
-	<div class="modal registration-form fade" role="dialog" aria-labelledby="register">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="register">User Registeration Form</h4>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal" id="register_form">
-						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-3 control-label">First Name</label>
-							<div class="col-sm-9">
-								<input type="text" name="first_name" class="form-control" placeholder="First Name" required>
+<div class="modal registration-form fade" role="dialog" aria-labelledby="register">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="register">User Registeration Form</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" id="register_form">
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-3 control-label">First Name</label>
+						<div class="col-sm-9">
+							<input type="text" name="first_name" class="form-control" placeholder="First Name" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-3 control-label">Last Name</label>
+						<div class="col-sm-9">
+							<input type="text" name="last_name" class="form-control" placeholder="Last Name" required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputPassword3" class="col-sm-3 control-label">Phone#</label>
+						<div class="col-sm-9">
+							<input type="number" name="phone" class="form-control" placeholder="Phone Number" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-3 control-label">Email</label>
+						<div class="col-sm-9">
+							<input type="email" name="email" class="form-control" placeholder="Email" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword3" class="col-sm-3 control-label">Password</label>
+						<div class="col-sm-9">
+							<input type="password" name="password" class="form-control" placeholder="Password" required>
+							<input type="hidden" name="type" class="form-control" value="user">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-3 col-sm-9">
+							<div class="alert alert-danger" role="alert" id="register_error_block" style="margin-bottom:0px;display:none">
+								<strong>Error!</strong> Username already exist.
 							</div>
 						</div>
-						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-3 control-label">Last Name</label>
-							<div class="col-sm-9">
-								<input type="text" name="last_name" class="form-control" placeholder="Last Name" required>
-							</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-3 col-sm-9">
+							<button type="submit" class="btn btn-default"><i class="fa fa-spinner fa-spin" id="register_spinner" style="display:none"></i> Register</button>
 						</div>
-						
-						<div class="form-group">
-							<label for="inputPassword3" class="col-sm-3 control-label">Phone#</label>
-							<div class="col-sm-9">
-								<input type="number" name="phone" class="form-control" placeholder="Phone Number" required>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-3 control-label">Email</label>
-							<div class="col-sm-9">
-								<input type="email" name="email" class="form-control" placeholder="Email" required>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="inputPassword3" class="col-sm-3 control-label">Password</label>
-							<div class="col-sm-9">
-								<input type="password" name="password" class="form-control" placeholder="Password" required>
-								<input type="hidden" name="type" class="form-control" value="user">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-offset-3 col-sm-9">
-								<div class="alert alert-danger" role="alert" id="register_error_block" style="margin-bottom:0px;display:none">
-									<strong>Error!</strong> Username already exist.
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-offset-3 col-sm-9">
-								<button type="submit" class="btn btn-default"><i class="fa fa-spinner fa-spin" id="register_spinner" style="display:none"></i> Register</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
+					</div>
+				</form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 
 
-	<?php include('./include/footer.php') ?>
+<?php include('./include/footer.php') ?>
 </body>
 </html>
