@@ -17,6 +17,9 @@ if (isset($_GET['id'])) {
 	$data = $restaurant->find('id',$_GET['id']);
 	$menu_data = $menu->multipleFind('restaurant_id',$_GET['id']);
 	$reviews = $review->showReview($_GET['id']);
+
+	$countReview = $review->find2('user_id',$session->get_session_data('id'),'restaurant_id',$_GET['id']);
+	$countReview = count($countReview);
 }
 ?>
 
@@ -61,7 +64,10 @@ if (isset($_GET['id'])) {
 				<li role="presentation" class="active"><a href="#menu" aria-controls="menu" role="tab" data-toggle="tab">Menu</a></li>
 				<li role="presentation"><a href="#review" aria-controls="review" role="tab" data-toggle="tab">Reviews</a></li>
 			</ul>
-			<a class="btn btn-warning" style="position: relative;margin-top: -40px;float: right;"><i class="fa fa-star"></i> Review</a>
+			<?php
+			if($countReview==0)
+				echo '<a  data-toggle="modal" data-target=".new-review" class="btn btn-warning" style="position: relative;margin-top: -40px;float: right;"><i class="fa fa-star"></i> Review</a>';
+			?>
 
 			<div class="col-sm-8">
 				<div class="tab-content" style="padding-top: 20px;">
@@ -154,6 +160,48 @@ if (isset($_GET['id'])) {
 
 <? endif; ?>
 </div>
+
+
+
+
+
+<div class="modal new-review fade" role="dialog" aria-labelledby="new-review">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" >New Review</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" id="new-review">
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-3 control-label">Rate: (out of 10)</label>
+						<div class="col-sm-9">
+							<input type="number" min="0" max="10" name="rating" class="form-control" placeholder="First Name" required>
+							<input type="hidden" name="user_id" class="form-control" value="<?= $session->get_session_data('id'); ?>">
+							<input type="hidden" name="restaurant_id" class="form-control" value="<?= $_GET['id']; ?>">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-3 control-label">Content</label>
+						<div class="col-sm-9">
+							<textarea name="content" class="form-control" placeholder="Content goes here" required></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-3 col-sm-9">
+							<button type="submit" class="btn btn-default"><i class="fa fa-spinner fa-spin" id="review_spinner" style="display:none"></i> Submit</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
 
 
 <div class="modal registration-form fade" role="dialog" aria-labelledby="register">

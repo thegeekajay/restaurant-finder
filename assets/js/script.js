@@ -133,84 +133,84 @@ jQuery(document).ready(function($) {
                 }
             }
         });
-        return false;
-    });
+return false;
+});
 
-    $('body').on('click', '.menu_item_edit', function(e) {
-        var $menuid = $(this).parent().attr('menu-item-id');
-        var $item = $(this).parent().attr('menu-item-item');
-        var $detail = $(this).parent().attr('menu-item-detail');
-        var $price = $(this).parent().attr('menu-item-price');
+$('body').on('click', '.menu_item_edit', function(e) {
+    var $menuid = $(this).parent().attr('menu-item-id');
+    var $item = $(this).parent().attr('menu-item-item');
+    var $detail = $(this).parent().attr('menu-item-detail');
+    var $price = $(this).parent().attr('menu-item-price');
 
-        $("#menu-item-edit input[name=menu_id]").val($menuid);
-        $("#menu-item-edit input[name=item]").val($item);
-        $("#menu-item-edit input[name=detail]").val($detail);
-        $("#menu-item-edit input[name=price]").val($price);
+    $("#menu-item-edit input[name=menu_id]").val($menuid);
+    $("#menu-item-edit input[name=item]").val($item);
+    $("#menu-item-edit input[name=detail]").val($detail);
+    $("#menu-item-edit input[name=price]").val($price);
 
-        $('.edit-menu-item').modal('show');
+    $('.edit-menu-item').modal('show');
 
-    });
+});
 
-    $('body').on('click', '.menu_item_delete', function(e) {
-        var $id = $(this).parent().attr('menu-item-id');
-        var $restaurant_id = $(this).parent().attr('restaurant-id');
-        $.ajax({
-            type: "POST",
-            url: './api/restaurant/menu/deleteMenuItem.php',
-            data: {
-                id: $id,
-                restaurant_id: $restaurant_id
-            },
-            success: function(data) {
-                data = $.parseJSON(data);
-                if (data.status == "success") {
-                    var menu_item = $('div[menu-id=' + $id + ']');
-                    menu_item.next().remove();
-                    menu_item.remove();
-                } else {
+$('body').on('click', '.menu_item_delete', function(e) {
+    var $id = $(this).parent().attr('menu-item-id');
+    var $restaurant_id = $(this).parent().attr('restaurant-id');
+    $.ajax({
+        type: "POST",
+        url: './api/restaurant/menu/deleteMenuItem.php',
+        data: {
+            id: $id,
+            restaurant_id: $restaurant_id
+        },
+        success: function(data) {
+            data = $.parseJSON(data);
+            if (data.status == "success") {
+                var menu_item = $('div[menu-id=' + $id + ']');
+                menu_item.next().remove();
+                menu_item.remove();
+            } else {
 
-                }
             }
-        });
+        }
     });
+});
 
-    $('#menu-item-edit').on('submit', function(e) {
-        $('#menu-item-edit-spinner').css('display', 'inline');
-        $.ajax({
-            type: "POST",
-            url: './api/restaurant/menu/editMenuItem.php',
-            data: new FormData(this),
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function(data) {
-                data = $.parseJSON(data);
-                if (data.status == "success") {
-                    var menuid = $('#menu-item-edit input[name=menu_id]').val();
-                    var str = '<div class="col-sm-2"><img src="' + data.menu.image + '" class="img-responsive" style="border-radius:10px"></div><div class="col-sm-8"><h4>' + data.menu.item + ' - $' + data.menu.price + '</h4><h5>' + data.menu.detail + '</h5></div><div class="col-sm-2" menu-item-id="' + data.menu.id + '" menu-item-item="' + data.menu.item + '" menu-item-detail="' + data.menu.detail + '" menu-item-price="' + data.menu.price + '"><button class="btn btn-sm btn-info menu_item_edit"><i class="fa fa-pencil"></i></button> <button class="btn btn-sm btn-danger menu_item_delete"><i class="fa fa-trash-o"></i></button></div>';
-                    $('[menu-id=' + menuid + ']').html(str);
-                    $('.edit-menu-item').modal('hide');
-                    $('#menu-item-edit')[0].reset();
-                    $('#menu-item-edit-spinner').css('display', 'none');
-                } else {
-                    $('#menu-item-edit-spinner').css('display', 'none');
-                }
+$('#menu-item-edit').on('submit', function(e) {
+    $('#menu-item-edit-spinner').css('display', 'inline');
+    $.ajax({
+        type: "POST",
+        url: './api/restaurant/menu/editMenuItem.php',
+        data: new FormData(this),
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function(data) {
+            data = $.parseJSON(data);
+            if (data.status == "success") {
+                var menuid = $('#menu-item-edit input[name=menu_id]').val();
+                var str = '<div class="col-sm-2"><img src="' + data.menu.image + '" class="img-responsive" style="border-radius:10px"></div><div class="col-sm-8"><h4>' + data.menu.item + ' - $' + data.menu.price + '</h4><h5>' + data.menu.detail + '</h5></div><div class="col-sm-2" menu-item-id="' + data.menu.id + '" menu-item-item="' + data.menu.item + '" menu-item-detail="' + data.menu.detail + '" menu-item-price="' + data.menu.price + '"><button class="btn btn-sm btn-info menu_item_edit"><i class="fa fa-pencil"></i></button> <button class="btn btn-sm btn-danger menu_item_delete"><i class="fa fa-trash-o"></i></button></div>';
+                $('[menu-id=' + menuid + ']').html(str);
+                $('.edit-menu-item').modal('hide');
+                $('#menu-item-edit')[0].reset();
+                $('#menu-item-edit-spinner').css('display', 'none');
+            } else {
+                $('#menu-item-edit-spinner').css('display', 'none');
             }
-        });
-        return false;
+        }
     });
-    $.fn.myFunction = function() {
-        var total = 0;
-        $('.price').each(function() {
-            total = total + parseInt($(this).html());
-        });
-        $('#order_total').html(total);
+return false;
+});
+$.fn.myFunction = function() {
+    var total = 0;
+    $('.price').each(function() {
+        total = total + parseInt($(this).html());
+    });
+    $('#order_total').html(total);
 
-    }
-    $('.add-menu-item').on('click', function(e) {
-        var itemId = parseInt($(this).attr('item-id'));
-        var itemName = $(this).attr('item-name');
-        var itemPrice = parseInt($(this).attr('item-price'));
+}
+$('.add-menu-item').on('click', function(e) {
+    var itemId = parseInt($(this).attr('item-id'));
+    var itemName = $(this).attr('item-name');
+    var itemPrice = parseInt($(this).attr('item-price'));
         if ($('.order div[item-id=' + itemId + ']').length > 0) //items exist
         {
             var quantity = $('.order [item-id="' + itemId + '"] .quantity').html();
@@ -226,86 +226,151 @@ jQuery(document).ready(function($) {
         $.fn.myFunction();
     });
 
-    $('body').on('click', '.item-add', function() {
-        var itemId = parseInt($(this).attr('item-id'));
-        var itemPrice = parseInt($(this).closest('[item-price]').attr('item-price'));
-        var quantity = $('.order [item-id="' + itemId + '"] .quantity').html();
-        quantity = parseInt(quantity) + 1;
+$('body').on('click', '.item-add', function() {
+    var itemId = parseInt($(this).attr('item-id'));
+    var itemPrice = parseInt($(this).closest('[item-price]').attr('item-price'));
+    var quantity = $('.order [item-id="' + itemId + '"] .quantity').html();
+    quantity = parseInt(quantity) + 1;
+    var price = parseInt(itemPrice) * parseInt(quantity);
+    $('.order [item-id="' + itemId + '"] .quantity').html(quantity);
+    $('.order div[item-id="' + itemId + '"]').attr('item-quantity',quantity);
+    $('.order [item-id="' + itemId + '"] .price').html(price);
+    $.fn.myFunction();
+
+});
+
+$('body').on('click', '.item-minus', function() {
+    var itemId = parseInt($(this).attr('item-id'));
+    var itemPrice = parseInt($(this).closest('[item-price]').attr('item-price'));
+    var quantity = parseInt($('.order [item-id="' + itemId + '"] .quantity').html());
+    if (quantity > 1) {
+        quantity = parseInt(quantity) - 1;
         var price = parseInt(itemPrice) * parseInt(quantity);
         $('.order [item-id="' + itemId + '"] .quantity').html(quantity);
         $('.order div[item-id="' + itemId + '"]').attr('item-quantity',quantity);
         $('.order [item-id="' + itemId + '"] .price').html(price);
-        $.fn.myFunction();
+    } else {
+        var ele = $('.order div[item-id="' + itemId + '"]');
+        ele.next().remove();
+        ele.remove();
+    }
+    $.fn.myFunction();
+});
 
-    });
+$('.checkout').on('click',function(e){
+  e.preventDefault();
+  var url = '/api/restaurant/orders/newOrder.php';
+  var form = '<form id="checkout-form" action="' + url + '" method="post">';
+  $('.order>div').each(function(){
+    var itemId = $(this).attr('item-id');
+    var itemQuantity = $(this).attr('item-quantity');
+    var itemPrice = $(this).attr('item-price'); 
+    form+='<input type="hidden" name="'+itemId+'" value="'+itemQuantity+','+itemPrice+'"></input>';
+});
+  var restaurantId = $('.order').attr('restaurant-id');
+  form+='<input type="hidden" name="restaurant_id" value="'+restaurantId+'"></input>';
+  form+='</form>';
+  $('body').append(form);
+  $('#checkout-form').submit();
+});
 
-    $('body').on('click', '.item-minus', function() {
-        var itemId = parseInt($(this).attr('item-id'));
-        var itemPrice = parseInt($(this).closest('[item-price]').attr('item-price'));
-        var quantity = parseInt($('.order [item-id="' + itemId + '"] .quantity').html());
-        if (quantity > 1) {
-            quantity = parseInt(quantity) - 1;
-            var price = parseInt(itemPrice) * parseInt(quantity);
-            $('.order [item-id="' + itemId + '"] .quantity').html(quantity);
-            $('.order div[item-id="' + itemId + '"]').attr('item-quantity',quantity);
-            $('.order [item-id="' + itemId + '"] .price').html(price);
-        } else {
-            var ele = $('.order div[item-id="' + itemId + '"]');
-            ele.next().remove();
-            ele.remove();
-        }
-        $.fn.myFunction();
-    });
-
-    $('.checkout').on('click',function(e){
-      e.preventDefault();
-      var url = '/api/restaurant/orders/newOrder.php';
-      var form = '<form id="checkout-form" action="' + url + '" method="post">';
-      $('.order>div').each(function(){
-        var itemId = $(this).attr('item-id');
-        var itemQuantity = $(this).attr('item-quantity');
-        var itemPrice = $(this).attr('item-price'); 
-        form+='<input type="hidden" name="'+itemId+'" value="'+itemQuantity+','+itemPrice+'"></input>';
-      });
-      var restaurantId = $('.order').attr('restaurant-id');
-        form+='<input type="hidden" name="restaurant_id" value="'+restaurantId+'"></input>';
-      form+='</form>';
-      $('body').append(form);
-      $('#checkout-form').submit();
-    });
-
-    $('#credit_card').on('submit', function(e) {
-        $('#credit_card_spinner').css('display', 'inline');
-        $.ajax({
-            type: "POST",
-            url: './api/users/newCreditCard.php',
-            data: $("#credit_card").serialize(),
-            success: function(data) {
-                data = $.parseJSON(data);
-                if (data.status == "success") {
-                    $('#credit_card')[0].reset();
-                    location.reload();
-                } else {
-                    $('#credit_card_spinner').css('display', 'none');
-                }
+$('#credit_card').on('submit', function(e) {
+    $('#credit_card_spinner').css('display', 'inline');
+    $.ajax({
+        type: "POST",
+        url: './api/users/newCreditCard.php',
+        data: $("#credit_card").serialize(),
+        success: function(data) {
+            data = $.parseJSON(data);
+            if (data.status == "success") {
+                $('#credit_card')[0].reset();
+                location.reload();
+            } else {
+                $('#credit_card_spinner').css('display', 'none');
             }
-        });
-        return false;
+        }
     });
+    return false;
+});
 
-    $('#delivery_address').on('submit', function(e) {
-        $('#delivery_address_spinner').css('display', 'inline');
+$('#delivery_address').on('submit', function(e) {
+    $('#delivery_address_spinner').css('display', 'inline');
+    $.ajax({
+        type: "POST",
+        url: './api/users/newDeliveryAddress.php',
+        data: $("#delivery_address").serialize(),
+        success: function(data) {
+            data = $.parseJSON(data);
+            if (data.status == "success") {
+                $('#delivery_address')[0].reset();
+                location.reload();
+            } else {
+                $('#delivery_address_spinner').css('display', 'none');
+            }
+        }
+    });
+    return false;
+});
+
+$('.address').on('click',function(){
+    var ele = $(this);
+    $('.address').each(function(){
+        $(this).removeClass('selected-div').addClass('not-selected-div');
+    });
+    ele.addClass('selected-div');
+});
+$('.card').on('click',function(){
+    var ele = $(this);
+    $('.card').each(function(){
+        $(this).removeClass('selected-div').addClass('not-selected-div');
+    });
+    ele.addClass('selected-div');
+});
+
+$('.confirm-payment').on('click',function(){
+    if($('.address.selected-div').length == 0)
+    {
+        $('#address_error').show();
+    }
+    else{
+        $('#address_error').hide();
+    }
+    if($('.card.selected-div').length == 0)
+    {
+        $('#card_error').show();
+    }
+    else{
+        $('#card_error').hide();
+    }
+    if($('.card.selected-div').length == 1 && $('.address.selected-div').length == 1 )
+    {
+        var url = '/api/restaurant/orders/confirm-payment.php';
+        var form = '<form id="confirm-payment" action="' + url + '" method="post">';
+        var orderId = getUrlParameter('order-id');
+        var cardId = $('.card.selected-div').attr('card-id') ;
+        var addressId = $('.address.selected-div').attr('address-id') ;
+        form+='<input type="hidden" name="id" value="'+orderId+'"></input>';
+        form+='<input type="hidden" name="card_id" value="'+cardId+'"></input>';
+        form+='<input type="hidden" name="address_id" value="'+addressId+'"></input>';
+        form+='</form>';
+        $('body').append(form);
+        $('#confirm-payment').submit();
+    }
+
+});
+
+$('#new-review').on('submit', function(e) {
+        $('#review_spinner').css('display', 'inline');
         $.ajax({
             type: "POST",
-            url: './api/users/newDeliveryAddress.php',
-            data: $("#delivery_address").serialize(),
+            url: 'api/restaurant/reviews/addReview.php',
+            data: $("#new-review").serialize(),
             success: function(data) {
                 data = $.parseJSON(data);
                 if (data.status == "success") {
-                    $('#delivery_address')[0].reset();
                     location.reload();
                 } else {
-                    $('#delivery_address_spinner').css('display', 'none');
+                    $('#review_spinner').css('display', 'none');
                 }
             }
         });
@@ -313,3 +378,19 @@ jQuery(document).ready(function($) {
     });
 
 });
+
+
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+    sURLVariables = sPageURL.split('&'),
+    sParameterName,
+    i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};

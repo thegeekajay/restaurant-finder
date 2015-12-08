@@ -212,10 +212,14 @@ h6, .h6 {
 .selected-div{
   padding:20px;border: 1px solid rgba(0, 105, 197, 0.26);
   background-color: rgba(0, 105, 197, 0.26);
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .not-selected-div{
-  padding:20px;
-  border:1px solid #bbb;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 20px;
+  border: 1px solid #bbb;
 }
 
 

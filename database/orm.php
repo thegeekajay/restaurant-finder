@@ -43,6 +43,18 @@ class DB{
         return $this->dbConnection->send_sql($findString)->fetch_assoc();
     }
 
+    public function find2($column1,$value1,$column2,$value2)
+    {
+        $findString = "SELECT * FROM `$this->table` WHERE `$column1` = '$value1' AND `$column2` = '$value2';";
+        $result = $this->dbConnection->send_sql($findString);
+        $data = [];
+        while($row = mysqli_fetch_object($result))
+          {
+            array_push($data,(array) $row);
+          }
+        return $data;
+    }
+
     public function multipleFind($column,$value)
     {
         $findString = "SELECT * FROM `$this->table` WHERE `$column` = '$value' AND `deleted_at` IS NULL;";

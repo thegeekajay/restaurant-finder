@@ -36,6 +36,7 @@ if (isset($_GET['order-id'])) {
 
 		<div class="row">
 			<span style="font-size: 30px;font-weight: bold;">Delivery Address</span>
+			<span id="address_error" style="font-size: 15px;font-weight: bold;color:red;display:none"> * Select a delivery address</span>
 			<a style="float:right" class="btn btn-primary" data-toggle="modal" data-target=".delivery-address"><i class="fa fa-plus"></i> Add new</a>
 			<hr>
 			<?php
@@ -55,6 +56,7 @@ if (isset($_GET['order-id'])) {
 		<br>
 		<div class="row">
 			<span style="font-size: 30px;font-weight: bold;">Credit Card</span>
+			<span id="card_error" style="font-size: 15px;font-weight: bold;color:red;display:none"> * Select a credit card</span>
 			<a style="float:right" class="btn btn-primary" data-toggle="modal" data-target=".credit-card"><i class="fa fa-plus"></i> Add new</a>
 			<hr>
 			<?php
@@ -71,7 +73,7 @@ if (isset($_GET['order-id'])) {
 			
 		</div>
 		<br><hr><br>
-		<a class="btn btn-primary btn-lg" style="float:right"><span class="fa fa-forward"></span> Confirm Payment</a>
+		<a class="btn btn-primary btn-lg confirm-payment" style="float:right"><span class="fa fa-forward"></span> Confirm Payment</a>
 	<? else: ?>
 	<h1>Not-Authorized</h1>
 <? endif; ?>
